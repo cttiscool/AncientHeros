@@ -1,4 +1,5 @@
 #include "HomeScene.h"
+#include "SelectHeroScene.h"
 
 USING_NS_CC;
 
@@ -31,12 +32,21 @@ bool HomeScene::init()
     Point origin = Director::getInstance()->getVisibleOrigin();
     
     auto label = LabelTTF::create("Start", "Arial", 32);
-    
     label->setPosition(Point(origin.x + visibleSize.width/2,
                              origin.y + visibleSize.height - label->getContentSize().height));
-    
     this->addChild(label, 1);
     
+    auto closeItem = MenuItemImage::create(
+                                           "CloseNormal.png",
+                                           "CloseSelected.png",
+                                           CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
+    
+	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
+                                 origin.y + closeItem->getContentSize().height/2));
+    
+    auto menu = Menu::create(closeItem, NULL);
+    menu->setPosition(Point::ZERO);
+    this->addChild(menu, 1);
     
     return true;
 }
@@ -48,10 +58,11 @@ void HomeScene::menuCloseCallback(Ref* pSender)
 	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
+    
+    auto selectHeroScene = SelectHeroScene::createScene();
+    Director::getInstance()->replaceScene(selectHeroScene);
 
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+/*#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
-#endif
+#endif*/
 }
