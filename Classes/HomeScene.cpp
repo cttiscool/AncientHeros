@@ -30,19 +30,13 @@ bool HomeScene::init()
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
-    
-    auto label = LabelTTF::create("Start", "Arial", 32);
-    label->setPosition(Point(origin.x + visibleSize.width/2,
-                             origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
-    
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
+    Director::getInstance()->setContentScaleFactor(1);
+
+    auto closeItem = MenuItemFont::create("Start",
                                            CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
     
-	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                 origin.y + closeItem->getContentSize().height/2));
+	closeItem->setPosition(Point(origin.x + visibleSize.width/2,
+                                 origin.y + visibleSize.height - closeItem->getContentSize().height));
     
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Point::ZERO);
