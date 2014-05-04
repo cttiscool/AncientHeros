@@ -35,18 +35,14 @@ bool HomeScene::init()
     //start button
     auto startItem = MenuItemFont::create("Start",
                                            CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
-	/*startItem->setPosition(Point(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height - startItem->getContentSize().height - 20));*/
-    
     //handbook button
     auto handbookItem = MenuItemFont::create("HandBook",
                                           CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
-	handbookItem->setPosition(Point(startItem->getPositionX(),
-                                 startItem->getPositionY() - 60));
 
     //add menu
     auto menu = Menu::create(startItem, handbookItem, NULL);
     menu->setPosition(Point(origin.x + visibleSize.width/2, visibleSize.height));
+    menu->alignItemsVertically();
     this->addChild(menu, 1);
 
     // add menu animation
