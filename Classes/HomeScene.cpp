@@ -32,16 +32,26 @@ bool HomeScene::init()
     Point origin = Director::getInstance()->getVisibleOrigin();
     Director::getInstance()->setContentScaleFactor(1);
 
-    auto closeItem = MenuItemFont::create("Start",
+    //start button
+    auto startItem = MenuItemFont::create("Start",
                                            CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
+	/*startItem->setPosition(Point(origin.x + visibleSize.width/2,
+                                 origin.y + visibleSize.height - startItem->getContentSize().height - 20));*/
     
-	closeItem->setPosition(Point(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height - closeItem->getContentSize().height));
-    
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Point::ZERO);
+    //handbook button
+    auto handbookItem = MenuItemFont::create("HandBook",
+                                          CC_CALLBACK_1(HomeScene::menuCloseCallback, this));
+	handbookItem->setPosition(Point(startItem->getPositionX(),
+                                 startItem->getPositionY() - 60));
+
+    //add menu
+    auto menu = Menu::create(startItem, handbookItem, NULL);
+    menu->setPosition(Point(origin.x + visibleSize.width/2, visibleSize.height));
     this->addChild(menu, 1);
-    
+
+    // add menu animation
+    menu->runAction(EaseElasticOut::create(MoveBy::create(1.8f, Point(0, -200))));
+
     return true;
 }
 
