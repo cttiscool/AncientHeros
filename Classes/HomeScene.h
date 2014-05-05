@@ -7,6 +7,9 @@
 class HomeScene : public cocos2d::Layer
 {
 public:
+    cocos2d::Menu *settingMenu;
+    bool hasMenuSpread;
+
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
 
@@ -15,7 +18,10 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    
+
+    //setting menu item click
+    void menuSettingCallback(cocos2d::Ref* pSender);
+
     // implement the "static create()" method manually
     CREATE_FUNC(HomeScene);
 };

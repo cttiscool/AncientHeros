@@ -48,7 +48,39 @@ bool HomeScene::init()
     // add menu animation
     menu->runAction(EaseElasticOut::create(MoveBy::create(1.8f, Point(0, -200))));
 
+    //setting menu
+    auto settingItem = MenuItemFont::create("Setting",CC_CALLBACK_1(HomeScene::menuSettingCallback, this));
+    auto musicItem = MenuItemFont::create("Music",CC_CALLBACK_1(HomeScene::menuSettingCallback, this));
+    auto feedbackItem = MenuItemFont::create("Feedback",CC_CALLBACK_1(HomeScene::menuSettingCallback, this));
+    auto castItem = MenuItemFont::create("Cast",CC_CALLBACK_1(HomeScene::menuSettingCallback, this));
+
+    settingItem->setTag(0);
+    musicItem->setTag(1);
+    feedbackItem->setTag(2);
+    castItem->setTag(3);
+
+    settingMenu = Menu::create(settingItem, musicItem, feedbackItem, castItem, NULL);
+    settingMenu->setAnchorPoint(Point(0, 0));
+    settingMenu->setPosition(Point(50, 50));
+    this->addChild(settingMenu);
+
     return true;
+}
+
+void HomeScene::menuSettingCallback(Ref* pSender)
+{
+    int n = 0;
+    int b;
+    hasMenuSpread ? b = -1: b=1;
+
+    auto tempItem = settingMenu->getChildByTag(0);
+    do {
+        tempItem->runAction(MoveBy::create(0.5f, Point(b* 50 * n, 0)));
+        n++;
+        tempItem = settingMenu->getChildByTag(n);
+    } while (tempItem != NULL);
+
+    hasMenuSpread = !hasMenuSpread;
 }
 
 
