@@ -7,6 +7,7 @@
 //
 
 #include "SelectHeroScene.h"
+#include "MobClickCpp.h"
 
 
 USING_NS_CC;
@@ -40,4 +41,14 @@ bool SelectHeroScene::init()
     
     return true;
     
+}
+
+void SelectHeroScene::onEnter(){
+    Layer::onEnter();
+    MobClickCpp::beginLogPageView("SelectHeroScene");
+}
+
+void SelectHeroScene::onExit(){
+    Layer::onExit();
+    MobClickCpp::endLogPageView("SelectHeroScene");
 }

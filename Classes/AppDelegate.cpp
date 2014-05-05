@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HomeScene.h"
+#include "MobClickCpp.h"
 
 USING_NS_CC;
 
@@ -20,6 +21,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
+    //umeng
+    MobClickCpp::startWithAppkey("536730d456240b4bf8058a3f", "test");
+
     // turn on display FPS
     director->setDisplayStats(true);
 
@@ -39,6 +43,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
+    //umeng
+    MobClickCpp::applicationDidEnterBackground();
+
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -46,6 +53,9 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
+
+    //umeng
+    MobClickCpp::applicationWillEnterForeground();
 
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();

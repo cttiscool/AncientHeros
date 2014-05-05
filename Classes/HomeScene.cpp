@@ -1,5 +1,6 @@
 #include "HomeScene.h"
 #include "SelectHeroScene.h"
+#include "MobClickCpp.h"
 
 USING_NS_CC;
 
@@ -97,4 +98,14 @@ void HomeScene::menuCloseCallback(Ref* pSender)
 /*#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif*/
+}
+
+void HomeScene::onEnter(){
+    Layer::onEnter();
+    MobClickCpp::beginLogPageView("HomeScene");
+}
+
+void HomeScene::onExit(){
+    Layer::onExit();
+    MobClickCpp::endLogPageView("HomeScene");
 }
